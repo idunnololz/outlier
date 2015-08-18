@@ -1,0 +1,26 @@
+$theme-primary-color: #151516;
+$theme-primary-color-highlight: #e01212;
+$theme-primary-color-light: #181a1b;
+$theme-primary-color-lighter: #272b2a;
+$theme-header-style: 'Roboto', sans-serif;
+$theme-body-style: 'Roboto', sans-serif;
+
+$theme-text-color: #fff;
+
+$search-bar-color: #2d3331;
+$theme-hint-text-color: #5d6b64;
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    $theme-hint-text-color;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    $theme-hint-text-color;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    $theme-hint-text-color;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    $theme-hint-text-color;
+}
