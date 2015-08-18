@@ -116,12 +116,16 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
                             if (!isMobile) {
                                 $('#search-bar-input')[0].focus();
                             } else {
+                                // TODO - On mobile devices, this will only work because scrolling is delayed
+                                // Order of events:
+                                // Focus is gained
+                                // Scroll is started
+                                // Screen is resized
+                                // The way google.com deals with it is that they make their page long enough so the scroll will work regardless...
                                 $('#search-bar-input').focus(function() {
-                                    if ($(window).height() < 400) {
-                                        $('html, body').animate({
-                                            scrollTop: ($("#search-bar").offset().top - 10)
-                                        }, 'slow');
-                                    }
+                                    $('html, body').animate({
+                                        scrollTop: ($("#search-bar").offset().top - 10)
+                                    }, 'slow');
                                 });
                             }
                         } 
