@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import 'theme';
+@import 'mixin';
 
 html {
     -webkit-text-size-adjust: auto; /* Automatically adjusted for Safari on iPhone. */
@@ -12,15 +13,21 @@ body, html { /* set size of body to full page and remove margins */
     height: 100%;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
+.flex-align-top {
+    align-self: flex-start;
 }
 
 .content {
     padding-left: 10px;
     padding-right: 10px;
-    width: 960px;
+    max-width: 960px;
+}
+
+.content-no-padding {
+    @extend .content;
+    max-width: 960px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .center {
@@ -29,10 +36,20 @@ body {
 
 .themed {
     background-color: $theme-primary-color;
+    color: $theme-text-color;
+}
+
+.themed p {
+    color: $theme-text-color;
+}
+
+.themed h1 {
+    color: $theme-text-color;
 }
 
 .themed-light {
     background-color: $theme-primary-color-light;
+    color: $theme-text-color;
 }
 
 div.align-bottom {
@@ -84,19 +101,11 @@ menu, nav, section {
 .content h5,
 .content h6, {
     font-family: $theme-header-style;
-    color: #444;
+    color: $theme-text-color;
 }
 
 .center p {
     text-align: center;
-}
-
-.themed p {
-    color: $theme-text-color;
-}
-
-.themed h1 {
-    color: $theme-text-color;
 }
 
 div.no-padding {
@@ -118,6 +127,8 @@ hr {
 
 #topbar {
     height: 48px;
+    padding-right: 10px;
+    padding-left: 10px;
 
     display: flex;
     align-items: center;
@@ -182,10 +193,7 @@ hr {
 }
 
 .suggestion-circle-mask {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -khtml-border-radius: 50%;
+    @include radius(50%);
     height: 30px;
     width: 30px;
 }
@@ -239,9 +247,5 @@ hr {
     
     .content {
         width: 100%;
-    }
-
-    .main {
-        min-height: 400px;
     }
 }

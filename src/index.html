@@ -7,54 +7,65 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="index.css"/>
         <link rel="stylesheet" href="normalize.css"/>
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
         <script src="autosuggest.min.js" type="text/javascript"></script>
-        <script src="index.min.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript"></script>
     </head>
 
     <body id="body">
-        <div class="main match-parent-height">
-
-            <div class="match-parent-width tint" style="height: 2px"> 
-            </div>
-
-            <div class="center content match-parent-height themed-light spacer">
-                <div id="topbar" class="match-parent-width">
-<!--                     <a id="topbar-logo" href="index.html">
-                        <img id="logo" src="res/logo.png" alt="logo"/>
-                    </a> -->
-
-                    <div class="flex-spacer"> </div>
-                    <a href="champions.html" class="header-button">
-                        Champions
-                    </a>
-                    <a href="about.html" class="header-button">
-                        About
-                    </a>
-                </div>
-
-                <div id="search-content">
-                    <form id="search-form" class="match-parent-width">
-                        <div id="main-logo">
-                            <img id="logo" src="res/logo-big.png" alt="logo"/>
-                        </div>
-                        <div id="search-bar">
-                            <div id="search-bar-placeholder"> </div>
-                            <!-- <input type="text" class="center" placeholder="Summoner name/champion"> -->
-                            <div id="search-bar-items">
-                                <img id="search-button" class="item clickable" src="res/ic_search_black_24dp_1x.png" alt="search"/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="match-parent-width tint" style="position:absolute;height: 2px"> 
         </div>
 
-        <footer class="center">
-            <div class="footer content">
-                <p id="footer-text" class="center">© 2015 Outlier.GG. Data based on League of legends North America.</p>
+        <div class="center content-no-padding main match-parent-height themed-light">
+            <div id="topbar" class="match-parent-width">
+                <div class="flex-spacer"> </div>
+                <a href="champions.html" class="header-button">
+                    Champions
+                </a>
+                <a href="about.html" class="header-button">
+                    About
+                </a>
             </div>
-        </footer>
+
+            <div id="search-content">
+                <form id="search-form" class="match-parent-width">
+                    <div id="main-logo">
+                        <img id="logo" src="res/logo-big.png" alt="logo"/>
+                    </div>
+                    <div id="search-bar">
+                        <div id="search-bar-placeholder"> </div>
+                        <div id="search-bar-items">
+                            <img id="search-button" class="item clickable" src="res/ic_search_black_24dp_1x.png" alt="search"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <footer>
+                <div class="footer">
+                    <p id="footer-text" class="center">© 2015 Outlier.GG. Data based on League of legends North America.</p>
+                </div>
+            </footer>
+        </div>
     </body>
 </html>

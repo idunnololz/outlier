@@ -10,6 +10,7 @@
 }
 
 #search-content {
+    flex: 1;      
     margin-top: 80px;
 }
 
@@ -72,10 +73,15 @@
         width: 70%;
     }
 
-    #search-content {
+    #search-content {    
+        display: flex;
+        align-items: center;
+        margin-bottom: 30vh;
+
         position: relative;
         margin-top: 0;
-        top: 10%;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     #search-bar {

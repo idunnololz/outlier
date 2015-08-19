@@ -56,3 +56,10 @@
         $transitions: append($transitions, $trans, comma);
     }
 }
+
+@mixin radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+    -khtml-border-radius: $radius;
+}

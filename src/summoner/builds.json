@@ -1,0 +1,73 @@
+{
+    "summonerName": "idunnololz",
+    "summonerProfileSrc": "../res/profileIcon588.jpg",
+    "division": "Platinum II",
+
+    "builds": [
+        {
+            "champion": "Ahri",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "ADC",
+            "winrate": 44.88,
+            "itemBuild": [
+                {"id": 1055, "primary": false},
+                {"id": 2003, "primary": false},
+                {"id": 1038, "primary": false},
+                {"id": 3031, "primary": true},
+                {"id": 3006, "primary": true},
+                {"id": 3046, "primary": true},
+                {"id": 3072, "primary": true},
+                {"id": 3035, "primary": true},
+                {"id": 3115, "primary": true}
+            ]
+        },
+        {
+            "champion": "Jax",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "Support",
+            "winrate": 44.88
+        },
+        {
+            "champion": "Annie",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "Support",
+            "winrate": 44.88
+        },
+        {
+            "champion": "Janna",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "Support",
+            "winrate": 44.88
+        },
+        {
+            "champion": "Soraka",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "Support",
+            "winrate": 44.88
+        },
+        {
+            "champion": "Sona",
+            "summonerSpells": [
+                "SummonerFlash",
+                "SummonerDot"
+            ],
+            "role": "Support",
+            "winrate": 44.88
+        }
+    ]
+}
