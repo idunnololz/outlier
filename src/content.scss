@@ -126,13 +126,21 @@ hr {
 }
 
 #topbar {
-    height: 48px;
     padding-right: 10px;
     padding-left: 10px;
 
     display: flex;
     align-items: center;
-    justify-content: flex-start ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu-items {
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    height: 48px;
 }
 
 .header-button,
@@ -150,7 +158,7 @@ hr {
     font-weight: bold;
     font-size: small;
     color: $theme-primary-color-highlight;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    @include transition(background-color 0.3s ease-in-out, color 0.3s ease-in-out);
     cursor: pointer;
 }
 
@@ -174,6 +182,9 @@ hr {
 #topbar-logo {
     padding-left: 20px;
     padding-right: 20px;
+    height: 48px;
+    display: flex;
+    align-items: center;
 }
 
 .clickable {
@@ -212,11 +223,12 @@ hr {
     font-family: $theme-body-style;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    z-index: 1;
+    z-index: 100;
 }
 .react-autosuggest__suggestion {
     cursor: pointer;
     padding: 5px 20px;
+    z-index: 100;
 }
 
 .suggestion-item {

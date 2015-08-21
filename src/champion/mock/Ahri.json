@@ -1,0 +1,69 @@
+[
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "ADC",
+        "winrate": 44.88,
+        "itemBuild": [
+            {"id": 1055, "primary": false},
+            {"id": 2003, "primary": false},
+            {"id": 1038, "primary": false},
+            {"id": 3031, "primary": true},
+            {"id": 3006, "primary": true},
+            {"id": 3046, "primary": true},
+            {"id": 3072, "primary": true},
+            {"id": 3035, "primary": true},
+            {"id": 3115, "primary": true}
+        ],
+        "skillOrder": [0, 1, 2, 0, 0, 3, 0, 0, 1, 1, 3, 1, 1, 2, 2, 3, 2, 2]
+    },
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "Support",
+        "winrate": 44.88,
+        "skillOrder": [0, 1, 2, 0, 0, 3, 0, 0, 1, 1, 3, 1, 1, 2, 2, 3, 2, 2]
+    },
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "Support",
+        "winrate": 44.88
+    },
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "Support",
+        "winrate": 44.88
+    },
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "Support",
+        "winrate": 44.88
+    },
+    {
+        "champion": "Ahri",
+        "summonerSpells": [
+            "SummonerFlash",
+            "SummonerDot"
+        ],
+        "role": "Support",
+        "winrate": 44.88
+    }
+]

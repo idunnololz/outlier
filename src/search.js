@@ -23,7 +23,7 @@ $(function() {
     }
 
     $btnSearch.click(function() {
-        $formSearch[0].submit();
+        $formSearch.submit();
     });
 
     $formSearch.submit(function (e) {
@@ -31,6 +31,27 @@ $(function() {
 
         /* do what you want with the form */
         console.log("submit!");
+
+        var data = $('#search-form :input').serializeArray();
+        var term = data[0].value;
+
+        const escapedInput = regExpEscape(term.trim());
+        const lowercasedInput = term.trim().toLowerCase();
+
+        loadData(function() {
+            var found = false;
+            championData.filter(function(element, index, array) {
+                if (element.champion.toLowerCase() === lowercasedInput) {
+                    window.location.href = '/champion/index.html?id=' + element.champion;
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                window.location.href = '/summoner/index.html?search=' + escapedInput;
+            }
+        });
+
 
         // You must return false to prevent the default form behavior
         return false;

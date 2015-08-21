@@ -22,16 +22,15 @@ $(function() {
         } 
         return query_string;
     }();
-
-    console.log(QueryString.search);
     
     var core = [];
+    var champLib = [];
 
     var ProfileDiv = React.createClass({
         render: function() {
             var division;
             if (this.props.data.division != undefined) {
-                var division = (
+                division = (
                     <h3>{this.props.data.division.toUpperCase()}</h3>
                 );
             }
@@ -47,74 +46,14 @@ $(function() {
         }
     });
 
-    var BuildList = React.createClass({
-        render: function() {
-            var buildNodes = this.props.data.map(function (build, i) {
-                return (
-                    <Build build={build} key={i}>
-                    </Build>
-                );
-            });
-            return (
-                <div className="commentList">
-                    {buildNodes}
-                </div>
-            );
-        }
-    });
-
-    var Build = React.createClass({
-        render: function() {
-            var build = this.props.build;
-            var itemBuild = [];
-            if (build.itemBuild != undefined) {
-                itemBuild = build.itemBuild.map(function (item, i) {
-                    return (
-                        <img 
-                            className={item.primary ? "primary-item" : "item"} 
-                            src={"/res/item/" + core.items.data[item.id].image.full}
-                            key={i}/>
-                    );
-                });
-            }
-            return (
-                <div className="build themed-light">
-                    <div className="build-left-col">
-                        <img className="champion-profile-img" title={build.champion} src={"/res/autocomplete_mock/" + build.champion + ".png"}/>
-                        <img className="summoner-spell-1-img" title={build.summonerSpells[0].name} src={"/res/spell/" + build.summonerSpells[0].image.full}/>
-                        <img className="summoner-spell-2-img" title={build.summonerSpells[1].name} src={"/res/spell/" + build.summonerSpells[1].image.full}/>
-                    </div>
-                    <div className="build-right-col">
-                        <table className="flex-align-top">
-                            <tr>
-                                <td><h4>role</h4></td>
-                                <td><h3>{this.props.build.role}</h3></td>
-                            </tr>
-                            <tr>
-                                <td><h4>win rate</h4></td>
-                                <td><h3>{this.props.build.winrate + "%"}</h3></td>
-                            </tr>
-                            <tr>
-                                <td><h4>build</h4></td>
-                            </tr>
-                        </table>
-                        <div className="item-build">
-                            <div className="item-order-bg"/>
-                            {itemBuild}
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-    });
-
     var UserView = React.createClass({
         getInitialState: function() {
             return {
                 data: {
                     summonerName: QueryString.search,
                     builds: []
-                }
+                },
+                loaded: false
             };
         },
         componentDidMount: function() {
@@ -123,13 +62,15 @@ $(function() {
                     core.data = json;
                 }),
 
-                $.getJSON("summoner.json", function(summoners) {
+                $.getJSON("/res/summoner.json", function(summoners) {
                     core.summoners = summoners;
                 }),
 
-                $.getJSON("item.json", function(items) {
+                $.getJSON("/res/item.json", function(items) {
                     core.items = items;
-                })
+                }),
+
+                $.getScript("/buildlist.js")
             ).then(function() {
                 // do a bit of preprocessing
 
@@ -138,21 +79,29 @@ $(function() {
                     val.summonerSpells[1] = core.summoners.data[val.summonerSpells[1]];
                 });
 
-                this.setState({data: core.data});
+                this.setState({data: core.data, loaded: true});
             }.bind(this));
         },
         render: function() {
+            var buildlist;
+            if (this.state.loaded) {
+                buildlist = (<BuildList data={this.state.data.builds} core={core} />);
+            }
             return (
                 <div>
                     <ProfileDiv data={this.state.data} />
-                    <BuildList data={this.state.data.builds} />
+                    {buildlist}
                 </div>
             );
         }
     });
 
+    var url = "";
+    if (QueryString.search === "idunnololz") {
+        url = "builds.json";
+    }
     React.render(
-      <UserView url="builds.json"/>,
+      <UserView url={url}/>,
       $("#main-content")[0]
     );
 

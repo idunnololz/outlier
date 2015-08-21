@@ -22,16 +22,15 @@ $(function() {
         } 
         return query_string;
     }();
-
-    console.log(QueryString.search);
     
     var core = [];
+    var champLib = [];
 
     var ProfileDiv = React.createClass({displayName: "ProfileDiv",
         render: function() {
             var division;
             if (this.props.data.division != undefined) {
-                var division = (
+                division = (
                     React.createElement("h3", null, this.props.data.division.toUpperCase())
                 );
             }
@@ -47,74 +46,14 @@ $(function() {
         }
     });
 
-    var BuildList = React.createClass({displayName: "BuildList",
-        render: function() {
-            var buildNodes = this.props.data.map(function (build, i) {
-                return (
-                    React.createElement(Build, {build: build, key: i}
-                    )
-                );
-            });
-            return (
-                React.createElement("div", {className: "commentList"}, 
-                    buildNodes
-                )
-            );
-        }
-    });
-
-    var Build = React.createClass({displayName: "Build",
-        render: function() {
-            var build = this.props.build;
-            var itemBuild = [];
-            if (build.itemBuild != undefined) {
-                itemBuild = build.itemBuild.map(function (item, i) {
-                    return (
-                        React.createElement("img", {
-                            className: item.primary ? "primary-item" : "item", 
-                            src: "/res/item/" + core.items.data[item.id].image.full, 
-                            key: i})
-                    );
-                });
-            }
-            return (
-                React.createElement("div", {className: "build themed-light"}, 
-                    React.createElement("div", {className: "build-left-col"}, 
-                        React.createElement("img", {className: "champion-profile-img", title: build.champion, src: "/res/autocomplete_mock/" + build.champion + ".png"}), 
-                        React.createElement("img", {className: "summoner-spell-1-img", title: build.summonerSpells[0].name, src: "/res/spell/" + build.summonerSpells[0].image.full}), 
-                        React.createElement("img", {className: "summoner-spell-2-img", title: build.summonerSpells[1].name, src: "/res/spell/" + build.summonerSpells[1].image.full})
-                    ), 
-                    React.createElement("div", {className: "build-right-col"}, 
-                        React.createElement("table", {className: "flex-align-top"}, 
-                            React.createElement("tr", null, 
-                                React.createElement("td", null, React.createElement("h4", null, "role")), 
-                                React.createElement("td", null, React.createElement("h3", null, this.props.build.role))
-                            ), 
-                            React.createElement("tr", null, 
-                                React.createElement("td", null, React.createElement("h4", null, "win rate")), 
-                                React.createElement("td", null, React.createElement("h3", null, this.props.build.winrate + "%"))
-                            ), 
-                            React.createElement("tr", null, 
-                                React.createElement("td", null, React.createElement("h4", null, "build"))
-                            )
-                        ), 
-                        React.createElement("div", {className: "item-build"}, 
-                            React.createElement("div", {className: "item-order-bg"}), 
-                            itemBuild
-                        )
-                    )
-                )
-            );
-        }
-    });
-
     var UserView = React.createClass({displayName: "UserView",
         getInitialState: function() {
             return {
                 data: {
                     summonerName: QueryString.search,
                     builds: []
-                }
+                },
+                loaded: false
             };
         },
         componentDidMount: function() {
@@ -123,13 +62,15 @@ $(function() {
                     core.data = json;
                 }),
 
-                $.getJSON("summoner.json", function(summoners) {
+                $.getJSON("/res/summoner.json", function(summoners) {
                     core.summoners = summoners;
                 }),
 
-                $.getJSON("item.json", function(items) {
+                $.getJSON("/res/item.json", function(items) {
                     core.items = items;
-                })
+                }),
+
+                $.getScript("/buildlist.js")
             ).then(function() {
                 // do a bit of preprocessing
 
@@ -138,21 +79,29 @@ $(function() {
                     val.summonerSpells[1] = core.summoners.data[val.summonerSpells[1]];
                 });
 
-                this.setState({data: core.data});
+                this.setState({data: core.data, loaded: true});
             }.bind(this));
         },
         render: function() {
+            var buildlist;
+            if (this.state.loaded) {
+                buildlist = (React.createElement(BuildList, {data: this.state.data.builds, core: core}));
+            }
             return (
                 React.createElement("div", null, 
                     React.createElement(ProfileDiv, {data: this.state.data}), 
-                    React.createElement(BuildList, {data: this.state.data.builds})
+                    buildlist
                 )
             );
         }
     });
 
+    var url = "";
+    if (QueryString.search === "idunnololz") {
+        url = "builds.json";
+    }
     React.render(
-      React.createElement(UserView, {url: "builds.json"}),
+      React.createElement(UserView, {url: url}),
       $("#main-content")[0]
     );
 

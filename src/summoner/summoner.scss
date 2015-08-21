@@ -2,6 +2,7 @@
 @import '../theme';
 @import '../content';
 @import '../mixin';
+@import '../build';
 
 #topbar form {
     display: flex;
@@ -26,7 +27,7 @@
 }
 
 #topbar input:focus, textarea:focus {
-  box-shadow: 0 0 3px $theme-primary-color-highlight;
+    box-shadow: 0 0 3px $theme-primary-color-highlight;
 }
 
 #search-bar {
@@ -78,90 +79,14 @@
     }
 }
 
-.build {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .champion-profile-img {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        @include radius(50%);
-        border: 3px solid $theme-primary-color-highlight;
-        z-index: 3;
+// special mobile support
+@media screen and (max-width: 611px) {
+    .flex-spacer {
+        flex: 0;
     }
 
-    .summoner-spell-img {
-        position: relative;
-        width: 38px;
-        height: 38px;
-        @include radius(50%);
-        border: 1px solid $theme-primary-color-highlight;
-    }
-
-    .summoner-spell-1-img {
-        position: relative;
-        @extend .summoner-spell-img;
-        top: -32px;
-        margin-left: -5px;
-        z-index: 2;
-    }
-
-    .summoner-spell-2-img {
-        position: relative;
-        @extend .summoner-spell-img;
-        margin-top: 75px;
-        margin-left: -50px;
-        z-index: 1;
-    }
-
-    table td {
-        vertical-align:baseline;
-    }
-
-    h4 {
-        margin: 0 0 0 16px;
-        font-size: medium;
-        display: inline-block;
-        font-weight: 100;
-    }
-
-    h3 {
-        margin: -8px 0 0 16px;
-        font-size: large;
-        font-family: $theme-condensed-style;
-    }
-
-    .build-right-col {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .item-build {
-        padding-top: 10px;
-        display: flex;
-        flex-direction: row;
-        margin: 0 0 0 16px;
-    }
-
-    .item {
-        width: 42px;
-        height: 42px;
-        @include radius(50%);
-    }
-
-    .primary-item {
-        @extend .item;
-        border: 1px solid $theme-primary-color-highlight;
-    }
-
-    .item-order-bg {
-        position: absolute;
-        height: 20px;
-        border: 1px solid $theme-primary-color-highlight;
+    .menu-items {
+        flex: 1 0 auto;
     }
 }
+// special mobile support
