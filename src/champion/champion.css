@@ -580,7 +580,10 @@ hr {
       -khtml-border-radius: 50%;
       z-index: 2; }
     .build .build-top .primary-item {
-      border: 1px solid #e01212; }
+      padding: 3px;
+      width: 50px;
+      height: 50px;
+      border: 3px solid #e01212; }
     .build .build-top .bridge {
       width: 25px;
       background: url(/res/bridge_bg.png) 0 50% no-repeat;
@@ -643,7 +646,7 @@ hr {
       background-color: #fff; }
   .build a {
     margin-top: 20px;
-    padding: 16px;
+    padding: 10px 16px 10px 16px;
     align-self: flex-end;
     font-size: medium;
     font-weight: 100;
@@ -718,7 +721,7 @@ hr {
   flex: 1 0 auto; }
 
 .drop-down {
-  background-color: #25292b; }
+  background-color: #181a1b; }
   .drop-down .expand-collapse {
     margin-left: auto;
     margin-right: 0;
@@ -726,6 +729,11 @@ hr {
     width: 60px;
     background-repeat: no-repeat;
     background-position: center; }
+  .drop-down .content h5, .drop-down .content-no-padding h5 {
+    margin: 0 0 16px 0;
+    font-size: xx-large;
+    display: inline-block;
+    font-weight: 100; }
   .drop-down .content:hover, .drop-down .content-no-padding:hover {
     max-height: 200px; }
   .drop-down .test {
@@ -762,8 +770,11 @@ hr {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181a1b', endColorstr='#00000000',GradientType=0 );
     /* IE6-9 */ }
     .outer-div .champion-div .champion-thumb {
-      width: 128px;
-      height: 128px;
+      width: 120px;
+      height: 120px;
+      margin: 5px;
+      background-position: center center;
+      background-size: 140px 140px;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;

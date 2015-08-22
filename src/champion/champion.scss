@@ -54,7 +54,7 @@
 }
 
 .drop-down {
-    background-color: $theme-primary-color-light2;
+    background-color: $theme-primary-color-light;
 
     .expand-collapse {
         margin-left: auto; 
@@ -65,7 +65,14 @@
         background-position: center;
     }
 
-    .content {}
+    .content {
+        h5 {
+            margin: 0 0 16px 0;
+            font-size: xx-large;
+            display: inline-block;
+            font-weight: 100;
+        }
+    }
 
     .content:hover {
         max-height: 200px;
@@ -105,8 +112,11 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181a1b', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 
         .champion-thumb {
-            width: 128px;
-            height: 128px;
+            width: 120px;
+            height: 120px;
+            margin: 5px;
+            background-position: center center;
+            background-size: 140px 140px;
             @include radius(50%);
             border: 0;
 

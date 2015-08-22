@@ -17,20 +17,23 @@ var BuildList = React.createClass({displayName: "BuildList",
     },
     loadDataForBuilds: function(builds) {
         var champLib = this.state.champLib;
+        var champLibProp = this.props.champLib;
         builds.map(function (build, i) {
-            var champion = build.champion;
+            var champion = build.value.champion;
             if (champLib[champion] == undefined) {
-                $.getJSON("/res/champion/" + champion + ".json", function(json) {
-                    champLib[champion] = json.data[champion];
-                    this.setState({'champLib': champLib});
-                }.bind(this));
+                if (champLibProp[champion] !== undefined) {
+                    champLib[champion] = champLibProp[champion];
+                    this.setState({});
+                } else {
+                    $.getJSON("/res/champion/" + champion + ".json", function(json) {
+                        champLib[champion] = json.data[champion];
+                        this.setState({'champLib': champLib});
+                    }.bind(this));
+                }
             }
         }.bind(this));
     },
     componentDidMount: function() {
-        if (this.props.champLib != undefined) {
-            this.setState({champLib: this.props.champLib});
-        }
         this.loadDataForBuilds(this.props.data);
     },
     componentWillReceiveProps: function(nextProps) {
@@ -40,7 +43,7 @@ var BuildList = React.createClass({displayName: "BuildList",
         var champLib = this.state.champLib;
         var buildNodes = this.props.data.map(function (build, i) {
             return (
-                React.createElement(Build, {build: build, key: i, core: this.props.core, champLib: champLib}
+                React.createElement(Build, {build: build.value, key: i, core: this.props.core, champLib: champLib}
                 )
             );
         }.bind(this));
@@ -53,8 +56,46 @@ var BuildList = React.createClass({displayName: "BuildList",
 });
 
 var Build = React.createClass({displayName: "Build",
+    fetchSpecialSummonerSpell: function(summoners) {
+        if (summoners[0].id === "SummonerFlash") {
+            return summoners[1].id; 
+        }
+        return summoners[0].id;
+    },
     handleGetItemSetClick: function() {
-        
+        var build = this.props.build;
+
+        var items = $.map(build.itemEvents, function(elem, index) {
+            return {
+                id: elem.itemId.toString(),
+                count: 1
+            };
+        });
+
+        var blocks = [{
+            type: "Primary build",
+            showIfSummonerSpell: this.fetchSpecialSummonerSpell(build.summonerSpells),
+            'items': items
+        }];
+
+        var name = build.champion + "-" + build.role;
+
+        var itemSet = {
+            title: name,
+            type: "custom",
+            map: "SR",
+            mode: "any",
+            'blocks': blocks
+        };
+
+        $.when(
+            $.getScript("/libs/Blob.min.js"),
+            $.getScript("/libs/FileSaver.min.js")
+        ).then(function() {
+            var blob = new Blob([JSON.stringify(itemSet)], {type: "application/json;charset=utf-8"});
+            saveAs(blob, name + ".json");
+        }.bind(this));
+
     },
     render: function() {
         var champLib = this.props.champLib;
@@ -63,15 +104,15 @@ var Build = React.createClass({displayName: "Build",
         var itemBuild = [];
         var skillOrder = [];
         var champData = champLib[build.champion];
-        console.log(champData);
-        if (build.itemBuild != undefined) {
-            var length = build.itemBuild.length;
+        var itemBuildRaw = build.itemEvents;
+        if (itemBuildRaw != undefined) {
+            var length = itemBuildRaw.length;
             var itemBuild = [];
-            $.each(build.itemBuild, function(index, item) {
+            $.each(itemBuildRaw, function(index, item) {
                 itemBuild.push(
                         React.createElement("img", {
-                            className: item.primary ? "primary-item" : "item", 
-                            src: "/res/item/" + core.items.data[item.id].image.full, 
+                            className: item.is_final_item ? "primary-item" : "item", 
+                            src: "/res/item/" + core.items.data[item.itemId].image.full, 
                             key: index})
                 );
 
@@ -81,10 +122,10 @@ var Build = React.createClass({displayName: "Build",
             });
         }
 
-        if (build.skillOrder != undefined && champData != undefined) {
+        if (build.skillUps != undefined && champData != undefined) {
             var skillArr = makeArray(18, 5, 0);
 
-            $.each(build.skillOrder, function(index, val) {
+            $.each(build.skillUps, function(index, val) {
                 skillArr[val+1][index] = 1;
             });
 
@@ -153,7 +194,7 @@ var Build = React.createClass({displayName: "Build",
                             ), 
                             React.createElement("tr", null, 
                                 React.createElement("td", null, React.createElement("h4", null, "win rate")), 
-                                React.createElement("td", null, React.createElement("h3", null, this.props.build.winrate + "%"))
+                                React.createElement("td", null, React.createElement("h3", null, (build.winRate * 100).toFixed(2) + "%" + "(" + build.stats.count + ")"))
                             ), 
                             React.createElement("tr", null, 
                                 React.createElement("td", null, React.createElement("h4", null, "build"))

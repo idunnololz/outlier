@@ -70,7 +70,7 @@ $(function() {
                     core.items = items;
                 }),
 
-                $.getScript("/buildlist.js")
+                $.getScript("/buildlist.min.js")
             ).then(function() {
                 // do a bit of preprocessing
 
