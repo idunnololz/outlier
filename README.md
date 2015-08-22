@@ -23,7 +23,7 @@ Currently building the project and getting it to generate all of the files for *
 So due to the use of different technologies, building this project requires a bunch of different steps. To build the project, you want to:
   0. First compile all of the scss files to generate css file. The project is setup to expect the css files in the same directory the scss file was. For instance **src/champion/champion.scss** should compile to **src/champion/champion.css** and **src/index.scss** should compile to **src/index.css**.
   1. Next you want to compile all of the JSX files. All JSX source files are in **src/a/**. The project expects all generated JS files to be in **src/js/**. Note that the folder structure of the source files should be kept in **src/js/**.
-  2. After you are done with all of that all that is left to be done is to compile and optimize the project using r.js. The config file for this can be found at **src/js/build.js** 
+  2. After you are done with all of that all that is left to be done is to compile and optimize the project using r.js. The config file for this can be found at **src/js/build.js**.
   3. If you did all of this you should now have a generated directory called **www-built**.
 
 Before we continue I must explain that I use Windows so all steps explained here might be slightly platform specific. Alright so how do I accomplish all of this?
