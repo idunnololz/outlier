@@ -28,27 +28,27 @@ requirejs(['jquery', 'React', 'autosuggest.min', 'app/buildlist'], function ($, 
     var core = [];
     var champLib = [];
 
-    var ProfileDiv = React.createClass({
+    var ProfileDiv = React.createClass({displayName: "ProfileDiv",
         render: function() {
             var division;
             if (this.props.data.division != undefined) {
                 division = (
-                    <h3>{this.props.data.division.toUpperCase()}</h3>
+                    React.createElement("h3", null, this.props.data.division.toUpperCase())
                 );
             }
             return (
-                <div className="profile-div themed-light">
-                    <img className="summoner-profile-img" src={this.props.data.summonerProfileSrc}/>
-                    <div>
-                        <h1>{this.props.data.summonerName}</h1>
-                        {division}
-                    </div>
-                </div>
+                React.createElement("div", {className: "profile-div themed-light"}, 
+                    React.createElement("img", {className: "summoner-profile-img", src: this.props.data.summonerProfileSrc}), 
+                    React.createElement("div", null, 
+                        React.createElement("h1", null, this.props.data.summonerName), 
+                        division
+                    )
+                )
             );
         }
     });
 
-    var UserView = React.createClass({
+    var UserView = React.createClass({displayName: "UserView",
         getInitialState: function() {
             return {
                 data: {
@@ -85,13 +85,13 @@ requirejs(['jquery', 'React', 'autosuggest.min', 'app/buildlist'], function ($, 
         render: function() {
             var buildlist;
             if (this.state.loaded) {
-                buildlist = (<BuildList data={this.state.data.builds} core={core}/>);
+                buildlist = (React.createElement(BuildList, {data: this.state.data.builds, core: core}));
             }
             return (
-                <div>
-                    <ProfileDiv data={this.state.data} />
-                    {buildlist}
-                </div>
+                React.createElement("div", null, 
+                    React.createElement(ProfileDiv, {data: this.state.data}), 
+                    buildlist
+                )
             );
         }
     });
@@ -101,7 +101,7 @@ requirejs(['jquery', 'React', 'autosuggest.min', 'app/buildlist'], function ($, 
         url = "builds.json";
     }
     React.render(
-      <UserView url={url}/>,
+      React.createElement(UserView, {url: url}),
       $("#main-content")[0]
     );
 

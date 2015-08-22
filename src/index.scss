@@ -21,7 +21,7 @@
     flex-direction: column;
 }
 
-#search-content input {
+#search-content #search-bar-input {
     border-style: none;
     background-color: $search-bar-color;
     color: $theme-text-color;
@@ -35,7 +35,7 @@
     width: 100%;
 }
 
-#search-content input:focus, textarea:focus {
+#search-content #search-bar-input:focus, textarea:focus {
   box-shadow: 0 0 5px $theme-primary-color-highlight;
 }
 

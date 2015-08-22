@@ -722,6 +722,9 @@ hr {
 
 .drop-down {
   background-color: #181a1b; }
+  .drop-down .build {
+    margin-top: 0px;
+    margin-bottom: 0px; }
   .drop-down .expand-collapse {
     margin-left: auto;
     margin-right: 0;
@@ -730,7 +733,7 @@ hr {
     background-repeat: no-repeat;
     background-position: center; }
   .drop-down .content h5, .drop-down .content-no-padding h5 {
-    margin: 0 0 16px 0;
+    margin: 16px 0 0 32px;
     font-size: xx-large;
     display: inline-block;
     font-weight: 100; }

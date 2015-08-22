@@ -1,0 +1,2 @@
+// run this in the splash dir to remove all non default splashes
+find . -regex ".*_[^0].*\.jpg" -exec rm {} \;

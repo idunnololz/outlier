@@ -1,4 +1,8 @@
-$(function() {
+requirejs(['./config'], function (config) {
+requirejs(['jquery', 'React', 'autosuggest.min', 'app/buildlist'], function ($, React, Autosuggest, BuildListLib) {
+    var BuildList = BuildListLib.BuildList;
+    var Build = BuildListLib.Build;
+    requirejs(['app/search']);
     var QueryString = function () {
         // This function is anonymous, is executed immediately and 
         // the return value is assigned to QueryString!
@@ -136,8 +140,6 @@ $(function() {
                         core.items = items;
                     }),
 
-                    $.getScript("/buildlist.js"),
-
                     $.getJSON("/res/summoner.json", function(summoners) {
                         var sumsById = [];
                         $.each(summoners.data, function(key, obj) {
@@ -213,5 +215,5 @@ $(function() {
             championName: ""}),
         $("#main-content")[0]
     );
-
+});
 });

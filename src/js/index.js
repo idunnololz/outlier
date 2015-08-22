@@ -96,10 +96,10 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
 
     function renderSuggestion(suggestion, input) { // In this example, 'suggestion' is a string
         return (                                     // and it returns a ReactElement
-            <div className="suggestion-item">
-                <img className="suggestion-circle-mask" src={"res/autocomplete_mock/" + suggestion.image}></img>
-                <span className="suggestion-text">{suggestion.champion}</span>
-            </div>
+            React.createElement("div", {className: "suggestion-item"}, 
+                React.createElement("img", {className: "suggestion-circle-mask", src: "res/autocomplete_mock/" + suggestion.image}), 
+                React.createElement("span", {className: "suggestion-text"}, suggestion.champion)
+            )
         );
     }
 
@@ -114,14 +114,14 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
     };
 
     React.render(
-        <div>
-            <Autosuggest 
-                         suggestions={getSuggestions}
-                         suggestionRenderer={renderSuggestion}
-                         inputAttributes={inputAttributes}
-                         suggestionValue={getSuggestionValue}
-                         scrollBar={true}
-                         ref={ 
+        React.createElement("div", null, 
+            React.createElement(Autosuggest, {
+                         suggestions: getSuggestions, 
+                         suggestionRenderer: renderSuggestion, 
+                         inputAttributes: inputAttributes, 
+                         suggestionValue: getSuggestionValue, 
+                         scrollBar: true, 
+                         ref:  
                             function() {
                                 if (!isMobile) {
                                     $('#search-bar-input')[0].focus();
@@ -138,13 +138,13 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
                                         }, 'slow');
                                     });
                                 }
-                            } 
-                         }/>
+                            }
+                         }), 
 
-            <div id="search-bar-items">
-                <input className="item" type="image" src="res/ic_search_black_24dp_1x.png" alt="Search" />
-            </div>
-        </div>,
+            React.createElement("div", {id: "search-bar-items"}, 
+                React.createElement("input", {className: "item", type: "image", src: "res/ic_search_black_24dp_1x.png", alt: "Search"})
+            )
+        ),
         $("#search-bar")[0]
     );
 

@@ -110,10 +110,11 @@ var Build = React.createClass({
             var itemBuild = [];
             $.each(itemBuildRaw, function(index, item) {
                 itemBuild.push(
-                        <img
-                            className={item.is_final_item ? "primary-item" : "item"}
-                            src={"/res/item/" + core.items.data[item.itemId].image.full}
-                            key={index}/>
+                    <img
+                        className={item.is_final_item ? "primary-item" : "item"}
+                        src={"/res/item/" + core.items.data[item.itemId].image.full}
+                        key={index}
+                        title={core.items.data[item.itemId].name}/>
                 );
 
                 if (length - 1 != index) {

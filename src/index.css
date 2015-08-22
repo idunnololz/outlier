@@ -266,7 +266,7 @@ hr {
   justify-content: center;
   flex-direction: column; }
 
-#search-content input {
+#search-content #search-bar-input {
   border-style: none;
   background-color: #2d3331;
   color: #fff;
@@ -281,7 +281,7 @@ hr {
   border: none;
   width: 100%; }
 
-#search-content input:focus, textarea:focus {
+#search-content #search-bar-input:focus, textarea:focus {
   box-shadow: 0 0 5px #e01212; }
 
 #search-bar {

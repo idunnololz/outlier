@@ -1,38 +1,38 @@
 requirejs(['./config'], function (config) {
 requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosuggest) {
     requirejs(['app/search']);
-    var ChampionList = React.createClass({
+    var ChampionList = React.createClass({displayName: "ChampionList",
         render: function() {
             var championNodes = [];
             $.each(this.props.data, function (propertyName, valueOfProperty) {
                 championNodes.push(
-                    <Champion data={valueOfProperty} key={propertyName}/>
+                    React.createElement(Champion, {data: valueOfProperty, key: propertyName})
                 );
             });
             return (
-                <div className="champion-list">
-                    {championNodes}
-                </div>
+                React.createElement("div", {className: "champion-list"}, 
+                    championNodes
+                )
             );
         }
     });
 
-    var Champion = React.createClass({
+    var Champion = React.createClass({displayName: "Champion",
         handleClick: function(id) {
             window.location = '/champion/index.html?id=' + id;
         },
         render: function() {
             var champion = this.props.data;
             return (
-                <div className="champion" onClick={this.handleClick.bind(this, champion.id)}>
-                    <div className="thumb" style={{"backgroundImage": "url(/res/autocomplete_mock/" + champion.image.full +")"}}/>
-                    <h2>{champion.name}</h2>
-                </div>
+                React.createElement("div", {className: "champion", onClick: this.handleClick.bind(this, champion.id)}, 
+                    React.createElement("div", {className: "thumb", style: {"backgroundImage": "url(/res/autocomplete_mock/" + champion.image.full +")"}}), 
+                    React.createElement("h2", null, champion.name)
+                )
             );
         }
     });
 
-    var ChampionsView = React.createClass({
+    var ChampionsView = React.createClass({displayName: "ChampionsView",
         getInitialState: function() {
             return {
                 data: []
@@ -50,16 +50,16 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
         },
         render: function() {
             return (
-                <div className="champion-view">
-                    <h1>champions</h1>
-                    <ChampionList data={this.state.data}/>
-                </div>
+                React.createElement("div", {className: "champion-view"}, 
+                    React.createElement("h1", null, "champions"), 
+                    React.createElement(ChampionList, {data: this.state.data})
+                )
             );
         }
     });
 
     React.render(
-      <ChampionsView url={"champion.json"}/>,
+      React.createElement(ChampionsView, {url: "champion.json"}),
       $("#main-content")[0]
     );
 });
