@@ -1,1 +1,0 @@
-node C:\Users\iDunnololz\AppData\Roaming\npm\node_modules\requirejs\bin\r.js -o src\js\build.js
