@@ -21,6 +21,8 @@ The easiest way to host this project is to use Python. Steps:
  0. Done! Now to see the website just navigate to [http://localhost:5000/](http://localhost:5000/) in your favourite browser.
 
 ## Building the project from scratch
+**You don't need to build the project to run the project. All generated javascript files are checked into the repo so you can run the project by following the steps [here](#try-it-locally). The only extra bit that building the project gets you are optimized and minified CSS and JS files.**
+
 Currently building the project and getting it to generate all of the files for **prod** might be a bit difficult (sorry about that). This is due to not having enough time since this is an API competetive entry. So instead, I'm going to first go over the steps that need to happen to build the project and then explain how I do it.
 
 So due to the use of different technologies, building this project requires a bunch of different steps. To build the project, you want to:
