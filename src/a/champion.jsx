@@ -231,7 +231,7 @@ requirejs(['jquery', 'React', 'libs/autosuggest.min', 'app/buildlist', 'app/sear
                         dataType: 'json',
                         cache: true,
                         success: function(common) {
-                            core.common = common;
+                            core.common = common.data.value;
                         }.bind(this),
                         error: function(xhr, status, err) {
                             console.error(this.url, status, err.toString());

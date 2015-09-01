@@ -15,6 +15,8 @@ define(['jquery', 'React'], function ($, React) {
             return "Solo mid";
         } else if (role === "DUO_CARRY" && lane === "MIDDLE") {
             return "Duo mid";
+        } else if (role === "DUO_SUPPORT") {
+            return "Support";
         }
         
         return role + " " + lane;
@@ -270,6 +272,7 @@ define(['jquery', 'React'], function ($, React) {
                 var finalBuild = [];
 
                 $.each(itemBuildRaw, (index, item) => {
+                    console.log(item.itemId);
                     if (item.is_final_item) {
                         finalBuild.push(
                             <img
