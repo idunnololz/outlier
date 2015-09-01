@@ -17,6 +17,8 @@ define(['jquery', 'React'], function ($, React) {
             return "Duo mid";
         } else if (role === "DUO_SUPPORT") {
             return "Support";
+        } else if (role === "NONE") {
+            return "None";
         }
         
         return role + " " + lane;
@@ -159,7 +161,6 @@ define(['jquery', 'React'], function ($, React) {
             setTimeout(function()  {
                 var itemBuild = build.itemEvents;
 
-                console.log(itemBuild);
                 itemBuild = itemBuild.filter(function(elem)  {
                     return (elem.itemId !== "2010");
                 });
@@ -226,14 +227,18 @@ define(['jquery', 'React'], function ($, React) {
                     $.getScript("/libs/Blob.min.js"),
                     $.getScript("/libs/FileSaver.min.js")
                 ).then(function() {
+                    tooltip.pop(e.target, 
+                        'To use the item set, put the item set file in to your "League of Legends\\Config\\Champions\\' + 
+                            this.props.build.champion + 
+                            '\\Recommended\\" directory.', 
+                        {overlay:true, position:4});
+
                     $target.text("Get ItemSet");
                     var blob = new Blob([JSON.stringify(itemSet)], {type: "application/json;charset=utf-8"});
                     saveAs(blob, name + ".json");
                 }.bind(this));
             }.bind(this), 1);
-
-            console.log(build);
-
+            
         },
         useDefaultTooltip:function(component) {
             if (component == undefined) return;
@@ -395,7 +400,7 @@ define(['jquery', 'React'], function ($, React) {
                                 ), 
                                 React.createElement("tr", null, 
                                     React.createElement("td", null, React.createElement("h4", null, "win rate")), 
-                                    React.createElement("td", null, React.createElement("h3", null, (build.stats.wins/(build.stats.wins + build.stats.losses) * 100).toFixed(2) + "%" + "(" + build.stats.count + ")"))
+                                    React.createElement("td", null, React.createElement("h3", null, (build.stats.wins/(build.stats.wins + build.stats.losses) * 100).toFixed(2) + "%"))
                                 ), 
                                 React.createElement("tr", null, 
                                     React.createElement("td", null, React.createElement("h4", null, "final build"))

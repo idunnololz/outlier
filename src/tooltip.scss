@@ -43,7 +43,7 @@ div#mcttCloseButton {
 /* Only applies when overlay has been set to true or 1 */
 div#mcOverlay 
 {
-    background-color: white;
+    background-color: #000;
     opacity:0.8; filter: alpha(opacity=80); 
     display:none;top:0;left:0;width:100%;height: 100%;overflow:visible;z-index:4; 
 }

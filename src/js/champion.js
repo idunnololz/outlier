@@ -263,7 +263,7 @@ requirejs(['jquery', 'React', 'libs/autosuggest.min', 'app/buildlist', 'app/sear
 
     React.render(
         React.createElement(ChampionView, {
-            url: "http://52.88.69.35:5000/api/champion/outlier/", //"/a/offline/champion"
+            url: "http://52.88.69.35:5000/api/champion/outlier/", // "/a/offline/champion" 
             commonUrl: "http://52.88.69.35:5000/api/champion/common/", //"/a/offline/champion-common"
             id: QueryString.id, 
             championName: ""}),

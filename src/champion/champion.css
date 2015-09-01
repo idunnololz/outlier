@@ -345,7 +345,7 @@ div#mcttCloseButton { width: 14px; height: 14px; position: absolute; cursor: poi
 /*Give the close button a bigger size in smaller devices*/
 @media only screen and (max-width: 1024px) { div#mcttCloseButton { width: 24px; height: 24px; background-size: cover; } }
 /* Only applies when overlay has been set to true or 1 */
-div#mcOverlay { background-color: white; opacity: 0.8; filter: alpha(opacity=80); display: none; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; z-index: 4; }
+div#mcOverlay { background-color: #000; opacity: 0.8; filter: alpha(opacity=80); display: none; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; z-index: 4; }
 
 /*Only available when calling by tooltip.ajax(...). It will be a spinning image indicating a request is in progress.*/
 div#tooltipAjaxSpin { margin: 20px 50px; background: transparent url(loading.gif) no-repeat center center; width: 50px; height: 30px; font-size: 0; }
