@@ -1,6 +1,9 @@
 # Outlier - The front end
 This is the source for the website hosted at [outlier.gg](http://outlier.gg). If you are looking for the backend source, you can find it [here](https://github.com/kloong87li/league-outliers).
 
+## About the project
+You can find out more about the project [here](http://outlier.gg/about).
+
 ## Technologies
 The front end uses a mixed bag of technologies. The reason? To learn new things!
 
