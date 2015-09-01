@@ -10,15 +10,30 @@ define(['jquery', 'React'], function ($, React) {
         return arr;
     }
 
+    function getSlangForLane(lane) {
+        if (lane === "MIDDLE") {
+            return "mid";
+        } else if (lane === "BOTTOM") {
+            return "bot";
+        } else if (lane === "TOP") {
+            return "top";
+        }
+        return "";
+    }
+
     function getRoleName(role, lane) {
-        if (role === "SOLO" && lane === "MIDDLE") {
-            return "Solo mid";
+        if (role === "SOLO") {
+            return "Solo " + getSlangForLane(lane);
+        } else if (role === "DUO") {
+            return "Duo " + getSlangForLane(lane);
         } else if (role === "DUO_CARRY" && lane === "MIDDLE") {
             return "Duo mid";
         } else if (role === "DUO_SUPPORT") {
             return "Support";
         } else if (role === "NONE") {
-            return "None";
+            return "Jungle";
+        } else if (role === "DUO_CARRY" && lane === "BOTTOM") {
+            return "Carry bot";
         }
         
         return role + " " + lane;
@@ -161,10 +176,6 @@ define(['jquery', 'React'], function ($, React) {
             setTimeout(function()  {
                 var itemBuild = build.itemEvents;
 
-                itemBuild = itemBuild.filter(function(elem)  {
-                    return (elem.itemId !== "2010");
-                });
-
                 var items = $.map(itemBuild, function(elem, index) {
                     var itemSetItem = elemToItemSetItem(elem);
 
@@ -277,7 +288,6 @@ define(['jquery', 'React'], function ($, React) {
                 var finalBuild = [];
 
                 $.each(itemBuildRaw, function(index, item)  {
-                    console.log(item.itemId);
                     if (item.is_final_item) {
                         finalBuild.push(
                             React.createElement("img", {
