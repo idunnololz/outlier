@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="index.css"/>
-        <link rel="stylesheet" href="normalize.css"/>
 
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -26,14 +25,19 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <script data-main="js/index" src="js/libs/require.min.js"></script>
+        <script src="/js/libs/require.min.js"></script>
+        <script>
+            require(['js/config'], function(){
+                require(['index']);
+            })
+        </script>
     </head>
 
     <body id="body">
         <div class="match-parent-width tint" style="position:absolute;height: 2px"> 
         </div>
 
-        <div class="center content-no-padding main match-parent-height themed-light">
+        <div class="center content-no-padding main match-parent-height themed-light card">
             <div id="topbar" class="match-parent-width">
                 <div class="flex-spacer"> </div>
                 <div class="menu-items">
@@ -52,13 +56,14 @@
                         <img id="logo" src="res/logo-big.png" alt="logo"/>
                     </div>
                     <div id="search-bar">
+                        <input id="search-bar-input" placeholder='Champion' />
                     </div>
                 </form>
             </div>
 
             <footer>
                 <div class="footer">
-                    <p id="footer-text" class="center">© 2015 Outlier.GG. Data based on League of legends North America.</p>
+                    <p>&copy; 2015 Outlier.GG. Data based on League of legends North America.</p>
                 </div>
             </footer>
         </div>

@@ -1,5 +1,5 @@
 requirejs(['./config'], function (config) {
-requirejs(['jquery', 'React', 'autosuggest.min', 'app/buildlist'], function ($, React, Autosuggest, BuildListLib) {
+requirejs(['jquery', 'React', 'libs/autosuggest.min', 'app/buildlist', 'app/search'], function ($, React, Autosuggest, BuildListLib) {
     var BuildList = BuildListLib.BuildList;
     var Build = BuildListLib.Build;
     var QueryString = function () {

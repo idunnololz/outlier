@@ -6,9 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700|Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="champions.css"/>
-        <link rel="stylesheet" href="../normalize.css"/>
-        <script data-main="/js/champions" src="/js/libs/require.min.js"></script>
-    </head>
+        <script src="/js/libs/require.min.js"></script>
+        <script>
+            require(['/js/config.js'], function(){
+                require(['champions']);
+            })
+        </script>
 
     <body id="body">
         <div class="match-parent-width tint" style="position:absolute; height: 2px"> 
@@ -16,16 +19,13 @@
 
         <div class="center content-no-padding match-parent-height main">
             <div id="topbar" class="match-parent-width themed-light">
-                <a id="topbar-logo" href="../index.html">
+                <a onmouseover="tooltip.pop(this, 'Hi', {maxWidth:600})" id="topbar-logo" href="../">
                     <img src="../res/logo.png" alt="logo"/>
                 </a>
 
                 <form id="search-form">
                     <div id="search-bar">
-                        <div id="search-bar-placeholder"> </div>
-                        <div id="search-bar-items">
-                            <img id="search-button" class="item clickable" src="../res/ic_search_black_24dp_sx.png" alt="search"/>
-                        </div>
+                        <input id="search-bar-input" placeholder='Champion' />
                     </div>
                 </form>
 
@@ -46,7 +46,7 @@
 
             <footer>
                 <div class="footer">
-                    <p id="footer-text" class="center">© 2015 Outlier.GG. Data based on League of legends North America.</p>
+                    <p>&copy; 2015 Outlier.GG. Data based on League of legends North America.</p>
                 </div>
             </footer>
         </div>

@@ -1,16 +1,196 @@
 @charset "utf-8";
-@import 'theme';
-@import 'content';
-@import 'mixin';
+
+.dismiss {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+.slide-enter {
+    opacity: 0.01;
+    transform: translateX(100px);
+}
+
+.slide-enter.slide-enter-active {
+    opacity: 1;
+    transform: none;
+
+    @include transition(all .2s ease);
+}
+
+.show-runes-masteries-container {
+    position: absolute;
+    top: 30px;
+    right: -10px;
+
+    .button-show-runes-masteries {
+        background-color: $theme-primary-color-lighter;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+
+        padding: 10px 32px 10px 32px;
+        font-size: medium;
+        font-weight: 100;    
+        font-family: $theme-body-style;
+
+        @include box-shadow(4px, 4px, 10px, rgba(0,0,0,0.5));
+
+        @include transition(all 0.3s ease-in-out);
+    }
+
+    .button-show-runes-masteries:hover {
+        background-color: $theme-primary-color-lighter2;
+    }
+
+    .fold {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #161818;
+        position: absolute;
+        right: 0px;
+        bottom: -10px;
+        z-index: 0;
+    }
+}
+
+.runes-masteries {
+    @extend .card;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+
+    @include transition(all .3s ease);
+
+    h1 {
+        margin: 0 30px 16px 30px;
+        font-size: large;
+        display: inline-block;
+        font-weight: 100;
+    }
+
+    .masteries {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-left: 14px;
+        padding-right: 14px;
+
+        .mastery-section {
+            display: flex;
+            flex-direction: column;
+            background-color: $theme-primary-color-lighter;
+            padding: 16px;
+            margin: 16px 16px 16px 16px;
+
+            .mastery-row {    
+                display: flex;
+                flex-direction: row;
+
+                span {
+                    position: relative;
+                }
+                
+                .mastery-cell {
+                    width: 48px;
+                    height: 48px;
+                    margin: 6px;
+                }
+
+                .mastery-cell-some {
+                    @extend .mastery-cell;
+                    border: 2px solid $mastery-some-color;
+                }
+
+                .mastery-cell-complete {
+                    @extend .mastery-cell;
+                    border: 2px solid $mastery-complete-color;
+                }
+
+                .mastery-rank {
+                    position: absolute;
+                    right: 9px;
+                    bottom: 0px;
+                    padding: 3px 5px 3px 5px;
+                    font-size: x-small;
+                    background-color: $theme-primary-color;
+                }
+
+                .mastery-rank-some {
+                    @extend .mastery-rank;
+                    border: 1px solid $mastery-some-color;
+                    color: $mastery-some-color;
+                }
+
+                .mastery-rank-complete {
+                    @extend .mastery-rank;
+                    border: 1px solid $mastery-complete-color;
+                    color: $mastery-complete-color;
+                }
+            }
+        }
+    }
+
+    .runes {
+        width: 100%;
+        
+        .runeItem {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 8px 30px 8px 30px;
+            padding: 10px 22px 10px 22px;
+            background-color: $theme-primary-color-lighter;
+
+            p {
+                flex: 1;
+                margin-left: 16px;
+                margin-right: 16px;
+                text-align: start;
+            }
+
+            .runeName {
+                font-size: medium;
+            }
+
+            .runeDesc {
+                margin-left: 8px;
+                font-size: small;
+                font-style: italic;
+            }
+        }
+    }
+}
 
 .build {
+    @extend .card;
+
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     align-items: flex-start;
+    position: relative;
+
+    @include transition(all .3s ease);
+
+    h4 {
+        margin: 16px 0 0 0;
+        font-size: large;
+        display: inline-block;
+        font-weight: 100;
+    }
 
     .build-top {
         display: flex;
@@ -25,9 +205,13 @@
             position: relative;
             width: 120px;
             height: 120px;
+            background-position: center center;
+            background-size: 140px 140px;
             @include radius(50%);
             border: 3px solid $theme-primary-color-highlight;
             z-index: 3;
+            display: inline-block;
+            @include box-shadow(4px, 4px, 10px, rgba(0,0,0,0.6));
         }
 
         .summoner-spell-img {
@@ -58,47 +242,63 @@
             vertical-align: baseline;
         }
 
-        h4 {
-            margin: 0 0 0 16px;
-            font-size: medium;
-            display: inline-block;
-            font-weight: 100;
-        }
-
         h3 {
             margin: -8px 0 0 16px;
             font-size: large;
             font-family: $theme-condensed-style;
+        }
+        
+        h4 {
+            margin: 0 0 0 16px;
         }
 
         .build-right-col {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1;
         }
 
-        .item-build {
+        .final-build {
             padding-top: 10px;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             margin: 0 0 0 16px;
+
+            .primary-item {
+                @include radius(50%);
+                position: relative;
+                width: 54px;
+                height: 54px;
+                margin-right: 10px;
+                border: 3px solid $theme-primary-color-highlight;
+
+                @include box-shadow(4px, 4px, 10px, rgba(0,0,0,0.6));
+            }
         }
+    }
+
+    .item-build {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
 
         .item {
             position: relative;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             @include radius(50%);
             z-index: 2;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .primary-item {
             @extend .item;
-            padding: 3px;
-            width: 50px;
-            height: 50px;
-            border: 3px solid $theme-primary-color-highlight;
+            border: 2px solid $theme-primary-color-highlight;
         }
 
         .bridge {
@@ -106,12 +306,6 @@
             background: url(/res/bridge_bg.png) 0 50% no-repeat;
             z-index: 1;
             position: relative;
-        }
-
-        .item-order-bg {
-            position: absolute;
-            height: 20px;
-            border: 1px solid $theme-primary-color-highlight;
         }
     }
 
@@ -125,16 +319,18 @@
         }
 
         .skill-order-table-container {
-            margin-top: 16px;
-            padding: 6px 16px 16px 16px;
-            background: $theme-primary-color-lighter;
+            margin-top: 5px;
+            padding: 6px 0 16px 0;
+            background: $theme-primary-color-light;
+            flex: 1;
         }
 
         .spell-icon {
             width: 21px;
             height: 21px;
             @include radius(50%);
-            display: block;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         h1 {
@@ -149,6 +345,8 @@
             margin: 0px 0 0 16px;
             font-size: medium;
             font-family: $theme-condensed-style;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         h3 {
@@ -161,73 +359,226 @@
         table td {
             padding-top: 5px;
             padding-bottom: 5px;
-            vertical-align: baseline;
+            border: 1px solid $theme-table-border-color;
+        }
+
+        .spell-icon-key {
+            white-space: nowrap;
         }
 
         .td-center {
             vertical-align: middle;
         }
 
-        .border-cell {
-            width: 30px;
-            border: 1px solid $theme-primary-color-light;
+        .skill-slot {
+            padding: 5px;
+            min-width: 35px;
+            min-height: 42px;
         }
 
-        .checked {
-            margin: auto;
-            display: block;
-            width: 10px;
-            height: 10px;
-            @include radius(50%);
-            background-color: #fff;
+        .level {
+            text-align: center;
+            background-color: $theme-primary-color-lighter;
+            padding-top: .2em;
+            padding-bottom: .2em;
+
+            @include box-shadow(4px, 4px, 5px, rgba(0,0,0,0.5));
         }
 
-        .unchecked {}
+        .spell-name-col {
+            width: 99%;
+        }
+
+        .nb { 
+            border: 0;
+        }
+
+        .nb-top {
+            border-top: 0;
+        }
+
+        .nb-bottom {
+            border-bottom: 0;
+        }
+
+        .nb-right {
+            border-right: 0;
+        }
+
+        .nb-left {
+            border-left: 0;
+        }
+
+        .nb-top-right {
+            @extend .nb-top;
+            border-right: 0;
+        }
+
+        .nb-top-left {
+            @extend .nb-top;
+            border-left: 0;
+        }
+
+        .nb-top-right-left {
+            @extend .nb-top-right;
+            border-left: 0;
+        }
+
+        .nb-top-bottom-left {
+            @extend .nb-top-left;
+            border-bottom: 0;
+        }
+
+        .nb-bottom-right {
+            @extend .nb-bottom;
+            border-right: 0;
+        }
     }
 
     a {
         margin-top: 20px;
-        padding: 10px 16px 10px 16px;
+        padding: 10px 32px 10px 32px;
         align-self: flex-end;
         font-size: medium;
         font-weight: 100;    
         font-family: $theme-body-style;
         background-color: $theme-button-bg;
         cursor: pointer;
-        box-shadow: 0px 4px $theme-button-shadow;
+        box-shadow: 0px 5px $theme-button-shadow;
 
         @include transition(all 0.3s ease-in-out);
     }
 
     a:hover {
         background-color: $theme-primary-color-highlight;
-        box-shadow: 0px 2px $theme-button-shadow;
+        box-shadow: 0px 3px $theme-button-shadow;
+        transform: translateY(2px);
     }
 
     a:active {
         background-color: $theme-button-down;
         box-shadow: 0px 0px $theme-button-shadow;
+        transform: translateY(5px);
     }
 }
 
 // special mobile support
-@media screen and (max-width: 820px) {
-    .build .build-bottom h1 {
-        font-size: 3vw;
+@media screen and (max-width: 1000px) {
+
+    .build-list {
+        overflow: hidden;
     }
+
+    .build {
+        overflow: hidden;
+    }
+
+    .runes-masteries {
+        overflow: hidden;
+        
+        .masteries {
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 860px) {
 
     .build .build-bottom h3 {
         font-size: 3vw;
     }
+
+    .build .build-bottom {
+        h1 {
+            display: none;
+        }
+    }
 }
 
-@media screen and (max-width: 640px) {
-    .build .build-bottom h1 {
-        margin: 0 4px 0 4px;
+@media screen and (max-width: 750px) {
+    .build .build-bottom {
+
+        .spell-icon-key {
+            position: relative;
+        }
+
+        .spell-icon {
+            opacity: .5;
+        }
+
+        h2 {
+            margin: 0px -10px 0 4px;
+            position: absolute;
+            left: 3px;
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .build .build-bottom {
+        .skill-slot {
+            min-width: 4.5vw;
+        }
+
+        .level {
+            text-align: center;
+            font-size: 2.5vw;
+            padding-top: .2vw;
+            padding-bottom: .2vw;
+        }
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .build {
+        padding-top: 60px;
     }
 
-    .build .build-bottom h2 {
-        margin: 0px 0 0 4px;
+    .show-runes-masteries-container {
+        top: 5px;    
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .build .build-bottom {
+
+        table td {
+            height: 1vw;
+        }
+
+        .skill-slot {
+            min-width: 4vw;
+            min-height: 0px;
+            padding: 0;
+        }
+
+        h2 {
+            margin: 0px -10px 0 4px;
+            position: absolute;
+            left: 3px;
+        }
+
+        .level {
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+    }
+
+    .runes-masteries {
+        .runes {    
+            .runeItem {
+                p {
+                    text-align: center;
+                }
+
+                .runeDesc {
+                    display: block;
+                    margin: 0;
+                }
+            }
+        }
     }
 }
 // special mobile support

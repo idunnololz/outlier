@@ -1,6 +1,4 @@
-requirejs(['./config'], function (config) {
-requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosuggest) {
-    requirejs(['app/search']);
+requirejs(['jquery', 'React', 'libs/autosuggest.min', 'app/search'], function ($, React, Autosuggest) {
     var ChampionList = React.createClass({displayName: "ChampionList",
         render: function() {
             var championNodes = [];
@@ -50,7 +48,7 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
         },
         render: function() {
             return (
-                React.createElement("div", {className: "champion-view"}, 
+                React.createElement("div", {className: "champions-view"}, 
                     React.createElement("h1", null, "champions"), 
                     React.createElement(ChampionList, {data: this.state.data})
                 )
@@ -62,5 +60,4 @@ requirejs(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosugges
       React.createElement(ChampionsView, {url: "champion.json"}),
       $("#main-content")[0]
     );
-});
 });

@@ -1,58 +1,14 @@
 @charset "utf-8";
-@import '../theme';
 @import '../content';
-@import '../mixin';
-
-#topbar form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#topbar input {
-    border-style: none;
-    background-color: $search-bar-color;
-    color: $theme-text-color;
-    font-family: $theme-body-style;
-    font-weight: 300;
-    font-size: small;
-
-    @include transition(all 0.3s ease-in-out);
-    outline: none;
-    padding: 5px 5px 5px 5px;
-    border: none;
-    width: 230px;
-}
-
-#topbar input:focus, textarea:focus {
-    box-shadow: 0 0 3px $theme-primary-color-highlight;
-}
-
-#search-bar {
-    position: relative;
-}
-
-#search-bar-items {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#search-bar-items .item {
-    padding: 10px;
-}
+@import '../search';
 
 #main-content {
     flex: 1 0 auto;
 }
 
-.champion-view {
+.champions-view {
+    @extend .card;
+    
     margin-top: 16px;
     margin-bottom: 16px;
     padding: 16px;
@@ -108,24 +64,16 @@
 
 // special mobile support
 @media screen and (max-width: 611px) {
-    .flex-spacer {
-        flex: 0;
-    }
-
-    .menu-items {
-        flex: 1 0 auto;
-    }
-
-    .champion-view .champion .thumb {
+    .champions-view .champion .thumb {
         width: 70px;
         height: 70px;
         background-size: 80px 80px;
     }
-    .champion-view .champion {
+    .champions-view .champion {
         padding: 8px;
     }
 
-    .champion-view .champion h2 {
+    .champions-view .champion h2 {
         font-size: medium;
     }
 }

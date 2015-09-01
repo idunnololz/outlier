@@ -1,0 +1,143 @@
+{"finalBuild": [
+    "3020",
+    "3089",
+    "3135",
+    "3157",
+    "3165",
+    "3285"
+  ],"itemEvents": [
+    {"is_final_item": null,"itemId": "1056","timestamp": 13525.524590163934
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 15201.019607843138
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 15584.7
+    },
+    {"is_final_item": null,"itemId": "3340","timestamp": 16178.82
+    },
+    {"is_final_item": null,"itemId": "3114","timestamp": 319259.3333333333
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 252911
+    },
+    {"is_final_item": null,"itemId": "2004","timestamp": 253424
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 258190
+    },
+    {"is_final_item": null,"itemId": "3108","timestamp": 414748
+    },
+    {"is_final_item": true,"itemId": "3165","timestamp": 540191
+    },
+    {"is_final_item": null,"itemId": "1001","timestamp": 671928
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 672872
+    },
+    {"is_final_item": null,"itemId": "2004","timestamp": 673426
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 674302
+    },
+    {"is_final_item": true,"itemId": "3020","timestamp": 825236
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 826443
+    },
+    {"is_final_item": null,"itemId": "1058","timestamp": 1055201
+    },
+    {"is_final_item": null,"itemId": "1052","timestamp": 1056667
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 1057846
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 1058186
+    },
+    {"is_final_item": true,"itemId": "3285","timestamp": 1178125
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 1180617
+    },
+    {"is_final_item": null,"itemId": "2004","timestamp": 1180973
+    },
+    {"is_final_item": null,"itemId": "1029","timestamp": 1322344
+    },
+    {"is_final_item": null,"itemId": "2010","timestamp": 1324865
+    },
+    {"is_final_item": null,"itemId": "1058","timestamp": 1391594
+    },
+    {"is_final_item": null,"itemId": "3361","timestamp": 1421084
+    },
+    {"is_final_item": null,"itemId": "3191","timestamp": 1535341
+    },
+    {"is_final_item": true,"itemId": "3157","timestamp": 1682059
+    },
+    {"is_final_item": null,"itemId": "1026","timestamp": 1692575
+    },
+    {"is_final_item": true,"itemId": "3089","timestamp": 2044027
+    },
+    {"is_final_item": null,"itemId": "1026","timestamp": 2138140
+    },
+    {"is_final_item": null,"itemId": "1314","timestamp": 2143102
+    },
+    {"is_final_item": null,"itemId": "2139","timestamp": 2230687
+    },
+    {"is_final_item": true,"itemId": "3135","timestamp": 2485479
+    }
+  ],"lane": "MIDDLE","masteries": [
+    {"masteryId": 4113,"rank": 3
+    },
+    {"masteryId": 4114,"rank": 1
+    },
+    {"masteryId": 4123,"rank": 3
+    },
+    {"masteryId": 4124,"rank": 1
+    },
+    {"masteryId": 4133,"rank": 1
+    },
+    {"masteryId": 4134,"rank": 3
+    },
+    {"masteryId": 4143,"rank": 3
+    },
+    {"masteryId": 4144,"rank": 1
+    },
+    {"masteryId": 4152,"rank": 3
+    },
+    {"masteryId": 4154,"rank": 1
+    },
+    {"masteryId": 4162,"rank": 1
+    },
+    {"masteryId": 4311,"rank": 1
+    },
+    {"masteryId": 4313,"rank": 3
+    },
+    {"masteryId": 4322,"rank": 2
+    },
+    {"masteryId": 4323,"rank": 1
+    },
+    {"masteryId": 4324,"rank": 1
+    },
+    {"masteryId": 4334,"rank": 1
+    }
+  ],"playrate": 67,"role": "SOLO","runes": [
+    {"rank": 9,"runeId": 5273
+    },
+    {"rank": 9,"runeId": 5296
+    },
+    {"rank": 9,"runeId": 5316
+    },
+    {"rank": 3,"runeId": 5357
+    }
+  ],"skillups": [
+    0,
+    2,
+    0,
+    1,
+    0,
+    3,
+    0,
+    1,
+    0,
+    1,
+    3,
+    1,
+    1,
+    2
+  ],"stats": {"assists": 395,"count": 67,"damageToChampions": 1076582,"deaths": 318,"goldEarned": 610296,"kills": 273,"losses": 39,"minionsKilled": 10410,"wins": 28
+  },"summonerSpells": [
+    "4",
+    "14"
+  ]
+}

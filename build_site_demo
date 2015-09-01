@@ -1,0 +1,3 @@
+node tools/r.js -o src/js/build/build-demo.js
+
+mkdir -p www-demo/js/libs/exclude/ &&  cp src/js/libs/exclude/* "$_"

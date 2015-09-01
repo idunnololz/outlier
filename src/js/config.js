@@ -1,8 +1,12 @@
 requirejs.config({
-    baseUrl: '/js/libs',
+    baseUrl: '/js',
     paths: {
-        app: '../app',
+        libs: 'libs',
+        app: 'app',
         jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min',
-        'React': 'https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min'
-    },
+        React: 'https://fb.me/react-with-addons-0.13.3.min'
+
+//        jquery: '../a/offline/jquery',
+//        React: '../a/offline/react-with-addons'
+    }
 });

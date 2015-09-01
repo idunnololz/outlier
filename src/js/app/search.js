@@ -1,5 +1,4 @@
-
-define(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosuggest) {
+define(['jquery', 'React', 'libs/autosuggest.min'], function ($, React, Autosuggest) {
     var $btnSearch = $('#search-button');
     var $formSearch = $('#search-form');
     var championData;
@@ -49,7 +48,7 @@ define(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosuggest) 
             });
 
             if (!found) {
-                window.location.href = '/summoner/index.html?search=' + escapedInput;
+                //window.location.href = '/summoner/index.html?search=' + escapedInput;
             }
         });
 
@@ -102,19 +101,30 @@ define(['jquery', 'React', 'autosuggest.min'], function ($, React, Autosuggest) 
         return suggestion.champion;
     }
 
+    function onSuggestionSelected(suggestion, event) {
+        $('#search-form :input').val(suggestion.champion);
+        $formSearch.submit();
+    }
+
     const inputAttributes = {
         id: 'search-bar-input',
         name: 'search',
-        placeholder: 'Summoner name/champion'
+        placeholder: 'Champion'
     };
 
     React.render(
-        React.createElement(Autosuggest, {suggestions: getSuggestions, 
-                     suggestionRenderer: renderSuggestion, 
-                     inputAttributes: inputAttributes, 
-                     suggestionValue: getSuggestionValue, 
-                     scrollBar: true}),
-        $("#search-bar-placeholder")[0]
+        React.createElement("div", null, 
+            React.createElement(Autosuggest, {suggestions: getSuggestions, 
+                         suggestionRenderer: renderSuggestion, 
+                         inputAttributes: inputAttributes, 
+                         suggestionValue: getSuggestionValue, 
+                         onSuggestionSelected: onSuggestionSelected, 
+                         scrollBar: true}), 
+            React.createElement("div", {id: "search-bar-items"}, 
+                React.createElement("input", {className: "item", type: "image", src: "/res/ic_search_black_24dp_sx.png", alt: "Search"})
+            )
+        ),
+        $("#search-bar")[0]
     );
     return undefined;
 });

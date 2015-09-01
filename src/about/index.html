@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Outlier.gg</title>
+        <meta name="description" content="Find outlier builds to all of your favorite champions!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="about.css"/>
+        <script src="/js/libs/marked.min.js"></script>
+        <script src="/js/libs/require.min.js"></script>
+        <script>
+            require(['/js/config.js'], function(){
+                require(['about']);
+            })
+        </script>
+    </head>
+
+    <body id="body">
+        <div class="match-parent-width tint" style="position:absolute; height: 2px"> 
+        </div>
+
+        <div class="center content-no-padding match-parent-height main">
+            <div id="topbar" class="match-parent-width themed-light">
+                <a id="topbar-logo" href="../">
+                    <img id="logo" src="../res/logo.png" alt="logo" title="logo"/>
+                </a>
+
+                <form id="search-form">
+                    <div id="search-bar">
+                        <input id="search-bar-input" placeholder='Champion' />
+                    </div>
+                </form>
+
+                <div class="flex-spacer"> </div>
+                <div class="menu-items">
+                    <a href="/champions/" class="header-button">
+                        Champions
+                    </a>
+                    <a href="/about/" class="header-button">
+                        About
+                    </a>
+                </div>
+            </div>
+
+            <div id="main-content">
+                <div id="markdown-content" class="content"> </div>
+
+                <div class="content about-author-container">
+                    <h1>About the authors</h1>
+                    <div class="authors-container"> 
+                        <div class="author-container">
+                            <h3>Ken Li</h3>
+                            <p>Ken Li is the back end developer of Outlier.gg, writing the entirety of the back end in Mongo DB and Python.</p>
+                            <p>He's the reason why we can even get outlier builds on this site</p>
+                        </div>
+                        <div class="author-container">
+                            <h3>Gary Guo</h3>
+                            <p>Gary Guo is the front end developer of Outlier.gg, authoring it's entirety in HTML, SASS and JSX.</p>
+                            <p>Passionate about design, he's the one to thank for why the site looks the way it does.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <h1>Disclaimer</h1>
+                    <p>Outlier.gg isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends &copy; Riot Games, Inc.</p>
+                </div>
+            </div>
+
+            <script>
+                var renderer = new marked.Renderer();
+                renderer.heading = function (text, level) {
+                    var escapedText = text.toLowerCase().replace(/[^\w]/g, '-');
+                    return '<h' + level + '><a name="' +
+                        escapedText +
+                        '" class="anchor" href="#' +
+                        escapedText +
+                        '"><span class="header-link-font header-link"></span></a>' +
+                        text + '</h' + level + '>';
+                }
+
+                var about =
+`
+# About
+Welcome to Outlier.gg. This page will hopefully answer any questions you may have about the site.
+
+## What is Outlier.gg?
+Outlier.gg is a build suggestion site for off meta builds that work. Unlike sites that offer good builds or sites that generates random "fun" builds for champions, we try to accomplish both. We do this by analyzing hundreds of thousands of builds to understand what a good build would look like and then look for uncommon builds that that perform just as well as the common ones. The end result are meta shattering builds that perform well so you can try new things and have fun without having to worry about the build falling apart.
+
+Our goal is to show players that the meta isn't the only way to play the game and be successful. **There are plenty of outlier builds out there too.**
+
+## How does Outlier.gg actually work?
+Generating good off meta builds isn't easy, so we've broken the solution to the problem into a series of different steps. The primary steps are:
+
+0. Data gathering
+0. Build grouping
+0. Build consolidation
+0. Unique build generation
+0. Outlier identification and ranking
+
+### Data gathering
+The first step is gathering data. Since the Riot API does not provide a good way of getting a list of match ids, we use a data crawling strategy. We first begin with a small list of summoner ids whom we select manually (seeds). We then run a query to get the last few games that they played. We then run a query for each game to get build data for 10 players (for Summoner's Rift) and add this data to our database. We then look at all of the players in each game and add all players we have not seen before into a player queue. We then repeat this process for each player in our player queue. This is essentially how we build up a big database of build data. This is an ongoing process to ensure that our data is always up to date.
+
+### Build grouping
+From the data gathering step, we can amass hundreds of thousands of builds. However this data set is rather large and inconvient to work with so we need to group builds together for easier processing. We do this by grouping builds by their champion, role and completed items. We first start with only builds with 6 completed items (or full builds) and grouping them together. E.g. all builds with the same 6 completed items for a particular role and champion are grouped together. 
+
+Then we look at builds with 5 or less completed items. For each of these builds we look for 6 item build groups where this build is a subset of the 6 item build, then for each 6 item build group, we add this build to that build group. *Careful, to avoid double counting, we assign weights to all of our builds. Builds that are inserted into multiple build groups have a weight equal to (1/number_of_build_groups_added_to).*
+
+At the end of this stage, we have a bunch of build groups, each representing a unqiue **complete** build.
+
+### Build consolidation
+The purpose of this stage is to consolidate all of the build under every build group into one build. To do this we use a [trie](https://en.wikipedia.org/wiki/Trie). We start by working on a single build group, then for each build in the build group, we look at it's full build order sans some items (such as potions and wards). We start at the root of the trie, and we look at the first item in the full build. We check if there is an edge for this item. If there isn't we an edge and a node for this item, otherwise we take the edge and proceed to the next node. We update the data at the node (such as incrementing the number of builds that follow this path, the win rate and the average time that is item is bought). We then make this node our current node. We keep doing this until we have processed the entire build. We then discard this build data and move on to the next build.
+
+Once all of the builds under a build group is processed, we look at the resulting trie. We set the root of the trie as our current node. We then look at each of the current node's children. We pick the child with the highest count (aka most popular route), we decide tie breakers by looking at win rates. We add this item to the cosolidated build path and make this child our current node. We keep doing this until we have a complete consolidated build. If the complete consolidated build is not a full build (6 items), we do a summary of all items that can be bought after the consolidated build and add them as "extras" to the consolidated build. We use this data later when generating the item sets.
+
+<img style="margin: auto" src="/res/about/fig_5001.png">
+
+### Unique build generation
+Once we have consolidated build paths for every unique final build, we need to eliminate similar builds. To do so, we construct a new build structure to store extra information about a build that would be useful when generating item sets. This build structure has a delta field allowing us to store differences in very similar builds. For determinism, all builds are sorted first by popularity (ties determined by win rate) and are processed from most popular to least. Similar builds are treated in a few ways.
+
+0. **For builds that have the same final items but different ordering**, we create a delta in the more popular build (ties determined by win rate), detailing the swap and the change in win rate and such.
+0. **For builds that have one item differences**, we create a delta in the more popular build (ties determined by win rate), detailing the differences in items and any changes in stats.
+0. **For builds with more than one item change or both item change and order change**, we consider these builds completely different.  
+
+Once we have all unique builds generated, we run through all deltas. For build order deltas, we sort all deltas by win rate. If the highest win rate delta is less than the win rate of the build, we discard all deltas. Otherwise we only keep the delta with the highest win rate.
+We do the same for item difference deltas.
+
+**Note that build counts are not summed in this step.**
+
+Here is an example of what a final build might look like for Garen:
+    
+    {
+        champion: "Garen",
+        stats: {
+            winrate: 56.77,
+            count: 1705
+        },
+        finalBuild: [
+            1020, 1021, 1022, 1023, 1024, 1025
+        ],
+        deltas: [
+            {
+                type: "ORDER",
+                finalBuild: [
+                    1024, 1023, 1021, 1020, 1022, 1025
+                ],
+                stats: {
+                    winrate: 57.50,
+                    count: 150
+                },
+                ...
+            }
+            {
+                type: "DIFFERENCE",
+                finalBuild: [
+                    1020, 3000, 1022, 1023, 1024, 1025
+                ],
+                stats: {
+                    winrate: 97.30,
+                    count: 10
+                },
+                ...
+            }
+        ]
+    }
+
+### Outlier identification and ranking
+This is the stage where we identify what we consider to be common builds and what are uncommon builds. For the most common build, we simply look at the count of the build and just pick the most used unquie build. To order the rest of the unique builds require some work, so we use some heuristics to rank and order the other uncommon builds. The main stats we use to determine a build's rank are the play rate, the win rate and the deviation from a standard build. We want high quality builds so we expect good builds to be played at least a hundred times. So for builds with over 100 plays the heuristics is: 
+    
+    (winrate * play_rate * deviation_value)
+`;
+                document.getElementById("markdown-content").innerHTML = marked(about, { renderer: renderer });
+            </script>
+
+            <footer>
+                <div class="footer">
+                    <p>&copy; 2015 Outlier.GG. Data based on League of legends North America.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -6,8 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700|Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="champion.css"/>
-        <link rel="stylesheet" href="../normalize.css"/>
-        <script data-main="/js/champion" src="/js/libs/require.min.js"></script>
+        <script type="text/javascript" src="/js/libs/exclude/tooltip.js"></script>
+        <script src="/js/libs/require.min.js"></script>
+        <script>
+            require(['/js/config.js'], function(){
+                require(['champion']);
+            })
+        </script>
     </head>
 
     <body id="body">
@@ -16,16 +21,13 @@
 
         <div class="center content-no-padding match-parent-height main">
             <div id="topbar" class="match-parent-width themed-light">
-                <a id="topbar-logo" href="../index.html">
-                    <img id="logo" src="../res/logo.png" alt="logo"/>
+                <a id="topbar-logo" href="../">
+                    <img id="logo" src="../res/logo.png" alt="logo" title="logo"/>
                 </a>
 
                 <form id="search-form">
                     <div id="search-bar">
-                        <div id="search-bar-placeholder"> </div>
-                        <div id="search-bar-items">
-                            <img id="search-button" class="item clickable" src="../res/ic_search_black_24dp_sx.png" alt="search"/>
-                        </div>
+                        <input id="search-bar-input" placeholder='Champion' />
                     </div>
                 </form>
 
@@ -45,7 +47,7 @@
 
             <footer>
                 <div class="footer">
-                    <p id="footer-text" class="center">© 2015 Outlier.GG. Data based on League of legends North America.</p>
+                    <p>&copy; 2015 Outlier.GG. Data based on League of legends North America.</p>
                 </div>
             </footer>
         </div>

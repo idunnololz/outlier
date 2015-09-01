@@ -1,12 +1,17 @@
 @charset "utf-8";
-@import 'theme';
 @import 'content';
-@import 'mixin';
 
+html {
+    overflow-y: hidden;
+}
 
 #main-logo {
     padding-top: 110px;
     height: 231px;
+}
+
+#topbar {
+    @include box-shadow-none();
 }
 
 #search-content {

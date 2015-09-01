@@ -1,62 +1,41 @@
 @charset "utf-8";
-@import '../theme';
 @import '../content';
-@import '../mixin';
 @import '../build';
-
-#topbar form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#topbar input {
-    border-style: none;
-    background-color: $search-bar-color;
-    color: $theme-text-color;
-    font-family: $theme-body-style;
-    font-weight: 300;
-    font-size: small;
-
-    @include transition(all 0.3s ease-in-out);
-    outline: none;
-    padding: 5px 5px 5px 5px;
-    border: none;
-    width: 230px;
-}
-
-#topbar input:focus, textarea:focus {
-    box-shadow: 0 0 3px $theme-primary-color-highlight;
-}
-
-#search-bar {
-    position: relative;
-}
-
-#search-bar-items {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#search-bar-items .item {
-    padding: 10px;
-}
+@import '../search';
+@import '../tooltip';
 
 #main-content {
     flex: 1 0 auto;
+}
+
+.expandable {
+    @include transition(all .5s ease);
+    opacity: 0;
+    overflow: hidden;
+}
+
+.common-build .build, .common-build .runes-masteries {
+    @include box-shadow-none();
+}
+
+div#mcTooltip {
+    h1 {
+        margin: 0;
+        font-size: large;
+        display: inline-block;
+        font-weight: 100;
+    }
 }
 
 .drop-down {
     background-color: $theme-primary-color-light;
 
     .build {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .runes-masteries {
         margin-top: 0px;
         margin-bottom: 0px;
     }
@@ -68,6 +47,13 @@
         width: 60px;
         background-repeat: no-repeat;
         background-position: center;
+        cursor: pointer;
+
+        @include transition(all .3s ease);
+    }
+
+    .expand-collapse:hover {
+        background-color: $theme-primary-color-lighter;
     }
 
     .content {
@@ -143,15 +129,3 @@
         }
     }
 }
-
-// special mobile support
-@media screen and (max-width: 611px) {
-    .flex-spacer {
-        flex: 0;
-    }
-
-    .menu-items {
-        flex: 1 0 auto;
-    }
-}
-// special mobile support

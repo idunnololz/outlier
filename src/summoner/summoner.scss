@@ -78,15 +78,3 @@
         font-family: $theme-condensed-style;
     }
 }
-
-// special mobile support
-@media screen and (max-width: 611px) {
-    .flex-spacer {
-        flex: 0;
-    }
-
-    .menu-items {
-        flex: 1 0 auto;
-    }
-}
-// special mobile support
